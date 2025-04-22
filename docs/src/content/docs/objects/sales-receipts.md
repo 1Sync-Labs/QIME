@@ -93,3 +93,15 @@ Sales Receipts can be brought over hourly. To schedule Sales Receipts syncing, u
 ```apex
 System.schedule('QB Sales Receipt Sync XX:00', '0 0 * * * ?', new qime.QBSalesReceiptBatch());
 ```
+
+### Sales Receipt Start / End Time
+
+We can also configure the start and end time of the master sync. This is done using the
+
+- `Sales Receipt Sync Start`
+- `Sales Receipt Sync End`
+  under the `QIME Parameter` custom metadata.
+
+These require an ISO-8601 date time for example [2025-04-22T11:55:49+0000](https://www.utctime.net/)
+![Sales Receipt Sync Start](../../../assets/sales-receipts/sr-sync-start.png)
+![Sales Receipt Sync End](../../../assets/sales-receipts/sr-sync-end.png)

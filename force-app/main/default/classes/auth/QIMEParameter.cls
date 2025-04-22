@@ -43,6 +43,40 @@ public class QIMEParameter {
     private set;
   }
 
+    /**
+   * @description The end date for the master sales receipt sync. Use ISO-8601 for the date format.
+   *              Controlled by the custom metadata record `QIME_Parameter.Sales_Receipt_Sync_End`, or `null` as the default
+   */
+  public static final DateTime SALES_RECEIPT_SYNC_END {
+    get {
+      if (SALES_RECEIPT_SYNC_END == null) {
+        SALES_RECEIPT_SYNC_END = getDatetime(
+          'Sales_Receipt_Sync_End',
+          null
+        );
+      }
+      return SALES_RECEIPT_SYNC_END;
+    }
+    private set;
+  }
+
+    /**
+   * @description The start date for the master sales receipt sync. Use ISO-8601 for the date format.
+   *              Controlled by the custom metadata record `QIME_Parameter.Sales_Receipt_Sync_Start`, or `null` as the default
+   */
+  public static final Datetime SALES_RECEIPT_SYNC_START {
+    get {
+      if (SALES_RECEIPT_SYNC_START == null) {
+        SALES_RECEIPT_SYNC_START = getDateTime(
+          'Sales_Receipt_Sync_Start',
+          null
+        );
+      }
+      return SALES_RECEIPT_SYNC_START;
+    }
+    private set;
+  }
+
   /**
    * @description Indicates what pricebook sales receipts will be created as.
    *              Controlled by the custom metadata record `QIME_Parameter.Sales_Receipt_Pricebook`, or `null` as the default
@@ -117,9 +151,9 @@ public class QIMEParameter {
 
   /**
    * @description Returns the configured value of the field `Value__c` as a `Integer`
-   * @param  parameterDeveloperName The developer name of the instance of `LoggerParameter__mdt`
+   * @param  parameterDeveloperName The developer name of the instance of `QIME_Parameter__mdt`
    * @param  defaultValue           A default value to return instead of null
-   * @return                        The `Integer` value configured in the matching instance of `LoggerParameter__mdt`
+   * @return                        The `Integer` value configured in the matching instance of `QIME_Parameter__mdt`
    *                                Returns the supplied `defaultValue` when no matching parameter is found, or the parameter value is null
    */
   public static Integer getInteger(
@@ -148,11 +182,23 @@ public class QIMEParameter {
     return parameterValue != null ? parameterValue : defaultValue;
   }
 
+    /**
+   * @description Returns the configured value of the field `Value__c` as a `Datetime`
+   * @param  parameterDeveloperName The developer name of the instance of `QIME_Parameter__mdt`
+   * @param  defaultValue           A default value to return instead of null
+   * @return                        The `Datetime` value configured in the matching instance of `QIME_Parameter__mdt`
+   *                                Returns the supplied `defaultValue` when no matching parameter is found, or the parameter value is null
+   */
+  public static Datetime getDatetime(String parameterDeveloperName, Datetime defaultValue) {
+    Datetime parameterValue = (Datetime) castParameterValue(parameterDeveloperName, Datetime.class);
+    return parameterValue ?? defaultValue;
+  }
+
   /**
    * @description Returns the configured value of the field `Value__c` as a `Id`
-   * @param  parameterDeveloperName The developer name of the instance of `LoggerParameter__mdt`
+   * @param  parameterDeveloperName The developer name of the instance of `QIME_Parameter__mdt`
    * @param  defaultValue           A default value to return instead of null
-   * @return                        The `Id` value configured in the matching instance of `LoggerParameter__mdt`
+   * @return                        The `Id` value configured in the matching instance of `QIME_Parameter__mdt`
    *                                Returns the supplied `defaultValue` when no matching parameter is found, or the parameter value is null
    */
   public static Id getId(String parameterDeveloperName, Id defaultValue) {

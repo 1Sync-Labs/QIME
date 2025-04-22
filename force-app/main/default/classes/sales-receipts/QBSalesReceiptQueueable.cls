@@ -19,8 +19,32 @@ global class QBSalesReceiptQueueable implements Queueable, Database.AllowsCallou
     if (totalCount == 0) {
       totalCount = QBMap.getCount(QBCallout.getSalesReceiptCount());
     }
-    String query =
-      'select * from SalesReceipt MAXRESULTS ' +
+    String query = 'select * from SalesReceipt ';
+    if (QIMEParameter.SALES_RECEIPT_SYNC_START != null) {
+      query +=
+        'WHERE Metadata.LastUpdatedTime > \'' +
+        QIMEParameter.SALES_RECEIPT_SYNC_START.formatGmt(
+          'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\''
+        ) +
+        '\'';
+    }
+
+    if (QIMEParameter.SALES_RECEIPT_SYNC_END != null) {
+      if (QIMEParameter.SALES_RECEIPT_SYNC_START != null) {
+        query += ' AND ';
+      } else {
+        query += ' WHERE ';
+      }
+      query +=
+        ' Metadata.LastUpdatedTime < \'' +
+        QIMEParameter.SALES_RECEIPT_SYNC_END.formatGmt(
+          'yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\''
+        ) +
+        '\'';
+    }
+
+    query +=
+      ' MAXRESULTS ' +
       String.valueOf(this.iteratorSize) +
       ' STARTPOSITION ' +
       String.valueOf(this.currentCount);
