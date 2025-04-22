@@ -1,6 +1,6 @@
 global class QIME {
   @TestVisible
-  private static final String CURRENT_VERSION_NUMBER = 'v4.19.0';
+  private static final String CURRENT_VERSION_NUMBER = 'v4.20.0';
 
   /**
    * @description Returns the current version number of QIME
